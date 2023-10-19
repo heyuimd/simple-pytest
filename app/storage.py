@@ -5,6 +5,8 @@ from app.lib import Storage, Entity
 
 
 class MemoryStorage(Storage):
+    """entity을 저장할 memory storage"""
+
     __storage: dict[int, Entity] = dict()
 
     def add(self, obj: Entity):
@@ -36,3 +38,4 @@ class MemoryStorage(Storage):
 
 
 storage = MemoryStorage()
+"""storage singleton"""

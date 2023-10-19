@@ -5,6 +5,8 @@ from app.exceptions import NotFoundEntity
 from app.storage import storage
 
 
+# fixture는 테스트 함수에서 파라미터를 받을 수 있다.
+#  request.param을 사용한다.
 @pytest.fixture
 def robots(request, clear_storage):
     params = getattr(request, "param", [(1, "A"), (2, "B")])
@@ -29,6 +31,8 @@ def test_get_by_id_failed(robots):
         Robot.get_by_id(storage, id_=max_id + 1)
 
 
+# parametrize을 사용해 테스트 시나리오를 정교하게 컨트롤할 수 있다.
+#  indirect 옵션을 통해 fixture에 파라미터를 넘길 수 있다.
 @pytest.mark.parametrize(
     "robots, name, expecting",
     [

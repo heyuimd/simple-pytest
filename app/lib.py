@@ -3,6 +3,8 @@ from typing import Any
 
 
 class Storage(ABC):
+    """storage interface"""
+
     @abstractmethod
     def add(self, obj: Any):
         pass
@@ -21,6 +23,8 @@ class Storage(ABC):
 
 
 class Entity(ABC):
+    """entity interface"""
+
     @abstractmethod
     def get_id(self) -> int:
         pass

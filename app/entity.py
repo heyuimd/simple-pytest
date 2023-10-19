@@ -2,6 +2,8 @@ from app.lib import Entity, Storage
 
 
 class Robot(Entity):
+    """storage에 저장할 robot entity"""
+
     id: int
     name: str
 

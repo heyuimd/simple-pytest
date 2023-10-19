@@ -6,6 +6,15 @@ from app.storage import storage
 from app.utils import start_program, stop_program, mul
 
 
+# scope을 통해 fixture의 생명주기 관리
+#   1. session: 테스트 시작부터 끝까지
+#   2. package: 디렉토리 시작에서 끝까지
+#   3. module: 파일 시작에서 끝까지
+#   4. class: 클래스 시작에서 끝까지
+#   5. function: 함수 시작에서 끝까지 (default)
+#
+# autouse가 True이면 테스트 함수에 명시적으로 할당하지 않아도 암시적으로 실행
+#  CAUTION: 테스트 수행시, 해당 fixture가 보여야 함
 @pytest.fixture(scope="session", autouse=True)
 def program():
     start_program()
@@ -15,13 +24,15 @@ def program():
     stop_program()
 
 
+# fixture가 yield로 반환하면 테스트 정리 작업을 할 수 있다.
 @pytest.fixture
 def clear_storage():
     yield
 
-    storage.clear()
+    storage.clear()  # 테스트 완료 후, 호출됨
 
 
+# fixture가 fixture를 파라미터로 받는다. fixture 사이의 의존성 관리
 @pytest.fixture
 def robots(clear_storage):
     _robots = [
@@ -34,6 +45,7 @@ def robots(clear_storage):
     return _robots
 
 
+# fixture는 테스트 함수의 파라미터로 받아서 재사용성을 높인다.
 def test_storage_add_failed(clear_storage):
     storage.add(Robot(id_=1, name="A"))
 

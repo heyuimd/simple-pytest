@@ -5,6 +5,7 @@ from app.exceptions import NotFoundEntity
 from app.storage import storage
 
 
+# module 안에서 사용할 fixture는 파일 안에 정의하자: 관련있는 로직을 가까이 유지해야 코드 읽기 편하다.
 @pytest.fixture
 def robots(clear_storage):
     _robots = [
