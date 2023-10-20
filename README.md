@@ -2,6 +2,8 @@
 
 ## src
 
+### app
+
 ```
 app
 ├── lib.py         # storage와 entity의 interface 정의
@@ -11,7 +13,7 @@ app
 └── utils.py       # utility 함수 정의
 ```
 
-## tests
+### tests
 
 ```
 tests
@@ -19,6 +21,12 @@ tests
 ├── ch02  # pytest로 migration
 ├── ch03  # refactor: 테스트를 모듈별로 분리하고 conftest.py을 이용해 fixture 관리
 └── ch04  # refactor: pytest.mark.parametrize을 사용해 다양한 케이스 테스트
+```
+
+## install
+
+```shell
+pip install -r requirements.txt
 ```
 
 ## run

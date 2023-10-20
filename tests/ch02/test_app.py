@@ -14,7 +14,7 @@ from app.utils import start_program, stop_program, mul
 #   5. function: 함수 시작에서 끝까지 (default)
 #
 # autouse가 True이면 테스트 함수에 명시적으로 할당하지 않아도 암시적으로 실행
-#  CAUTION: 테스트 수행시, 해당 fixture가 보여야 함
+#  CAUTION: 테스트 수행시, 해당 fixture가 보여야 함 (같은 파일 & conftest.py)
 @pytest.fixture(scope="session", autouse=True)
 def program():
     start_program()
@@ -45,7 +45,7 @@ def robots(clear_storage):
     return _robots
 
 
-# fixture는 테스트 함수의 파라미터로 받아서 재사용성을 높인다.
+# fixture는 테스트 함수의 파라미터로 주입받을 수 있다.
 def test_storage_add_failed(clear_storage):
     storage.add(Robot(id_=1, name="A"))
 
