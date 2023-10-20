@@ -5,6 +5,8 @@ from app.exceptions import NotFoundEntity, DuplicateEntity
 from app.storage import storage
 from app.utils import start_program, stop_program, mul
 
+# pytest.fixture 데코레이터로 데이터 fixture을 함수로 정의할 수 있다.
+
 
 # scope을 통해 fixture의 생명주기 관리
 #   1. session: 테스트 시작부터 끝까지
@@ -13,7 +15,7 @@ from app.utils import start_program, stop_program, mul
 #   4. class: 클래스 시작에서 끝까지
 #   5. function: 함수 시작에서 끝까지 (default)
 #
-# autouse가 True이면 테스트 함수에 명시적으로 할당하지 않아도 암시적으로 실행
+# autouse가 True이면 테스트 함수에 명시적으로 주입하지 않아도 암시적으로 실행된다.
 #  CAUTION: 테스트 수행시, 해당 fixture가 보여야 함 (같은 파일 & conftest.py)
 @pytest.fixture(scope="session", autouse=True)
 def program():
@@ -45,7 +47,7 @@ def robots(clear_storage):
     return _robots
 
 
-# fixture는 테스트 함수의 파라미터로 주입받을 수 있다.
+# 테스트 함수는 파라미터를 통해 데이터 fixture을 주입받을 수 있다.
 def test_storage_add_failed(clear_storage):
     storage.add(Robot(id_=1, name="A"))
 
