@@ -34,7 +34,7 @@ def test_get_by_id_failed(robots):
 # parametrize을 사용해 테스트 시나리오를 정교하게 컨트롤할 수 있다.
 #  indirect 옵션을 통해 fixture에 파라미터를 넘길 수 있다.
 @pytest.mark.parametrize(
-    "robots, name, expecting",
+    "robots, name, expected",
     [
         (
             [(1, "A"), (2, "B"), (3, "C"), (4, "B")],
@@ -55,8 +55,8 @@ def test_get_by_id_failed(robots):
     ],
     indirect=["robots"],
 )
-def test_find_by_name(robots, name, expecting):
+def test_find_by_name(robots, name, expected):
     robots_found = Robot.find_by_name(storage, name=name)
 
     # then
-    assert [(o.id, o.name) for o in robots_found] == expecting
+    assert [(o.id, o.name) for o in robots_found] == expected
